@@ -23,7 +23,7 @@ def get_valid_guess(chosen_letters, allowed_mistakes):
 
 
 def get_random_word():
-    with open("random_words.txt", "r") as f:
+    with open("sowpods.txt", "r") as f:
         lines = f.readlines()
         MAX = len(lines)
         random_word_index = random.randint(0, MAX)
@@ -39,7 +39,7 @@ if __name__ == "__main__":
     manipulated_correct_word = list(manipulated_correct_word)
     guessed_word = list(guessed_word)
     chosen_letters = []
-    allowed_mistakes = 6
+    allowed_mistakes = 7
     guess, allowed_mistakes, chosen_letters = get_valid_guess(
         chosen_letters, allowed_mistakes
     )

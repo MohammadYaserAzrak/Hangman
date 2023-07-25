@@ -2,10 +2,13 @@
 import random
 import string
 import sys
+from typing import Tuple
 
 
 # Functions defined
-def get_valid_guess(chosen_letters, allowed_mistakes):
+def get_valid_guess(
+    chosen_letters: list, allowed_mistakes: int
+) -> Tuple[str, int, list]:
     while True:
         guess = input("Guess your letter: ").strip().upper()
         if len(guess) != 1 or guess not in string.ascii_uppercase:

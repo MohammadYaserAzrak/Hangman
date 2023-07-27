@@ -1,5 +1,5 @@
 # Hangman
-A console application that uses the sowpods word list to play the well-known game Hangman.
+A console application that uses the SOWPODS word list to play the well-known game Hangman.
 
 ## Prerequisites
 - Python 3.x

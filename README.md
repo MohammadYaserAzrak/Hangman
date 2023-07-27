@@ -10,7 +10,7 @@ A console application that uses the SOWPODS word list to play the well-known gam
 ```
 git clone <repo-link>
 ```
-2. Run the main.py file:
+2. Run the hangman.py file:
 ```
-python main.py
+python hangman.py
 ```

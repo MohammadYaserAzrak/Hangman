@@ -1,64 +1,102 @@
-# Imported modules
-import random
-import string
-import sys
-from typing import Tuple
+import turtle
 
 
-# Functions defined
-def get_valid_guess(
-    chosen_letters: list, allowed_mistakes: int
-) -> Tuple[str, int, list]:
-    while True:
-        guess = input("Guess your letter: ").strip().upper()
-        if len(guess) != 1 or guess not in string.ascii_uppercase:
-            print("Invalid input. Please enter a single letter.")
-        elif guess in chosen_letters:
-            print("Letter was already chosen. Please guess again.")
-        elif guess not in manipulated_correct_word:
-            allowed_mistakes -= 1
-            if allowed_mistakes == 0:
-                sys.exit(f"You lost! The word was {CORRECT_WORD}")
-            print(f"Wrong letter! You have {allowed_mistakes} tries left")
-            chosen_letters.append(guess)
-        else:
-            return guess, allowed_mistakes, chosen_letters
+class Hangman:
+    def __init__(self) -> None:
+        turtle.hideturtle()
+        turtle.bgcolor("#CECECE")
+        turtle.setup(900, 900)
+        turtle.pensize(10)
 
+    def draw_gallows(self):
+        turtle.speed(0)
+        turtle.color("black")
+        turtle.penup()
+        turtle.goto(-325, -100)
+        turtle.pendown()
+        turtle.forward(150)
+        turtle.penup()
+        turtle.goto(-250, -100)
+        turtle.pendown()
+        turtle.left(90)
+        turtle.forward(300)
+        turtle.right(90)
+        turtle.forward(200)
+        turtle.right(90)
+        turtle.forward(100)
+        turtle.right(90)
 
-def get_random_word():
-    with open("sowpods.txt", "r") as f:
-        lines = f.readlines()
-        MAX = len(lines)
-        random_word_index = random.randint(0, MAX)
-        return lines[random_word_index].strip()
+    def draw_head(self):
+        turtle.speed(2)
+        turtle.color("#0000A5")
+        turtle.speed(8)
+        turtle.penup()
+        turtle.goto(-80, 130)
+        turtle.pendown()
+        turtle.circle(30)
 
+    def draw_body(self):
+        turtle.penup()
+        turtle.goto(-49, 100)
+        turtle.pendown()
+        turtle.goto(-49, -40)
 
-# Main
-if __name__ == "__main__":
-    print("Welcome to Hangman!")
-    CORRECT_WORD = get_random_word()
-    manipulated_correct_word = CORRECT_WORD
-    guessed_word = "_" * len(manipulated_correct_word)
-    manipulated_correct_word = list(manipulated_correct_word)
-    guessed_word = list(guessed_word)
-    chosen_letters = []
-    allowed_mistakes = 7
-    guess, allowed_mistakes, chosen_letters = get_valid_guess(
-        chosen_letters, allowed_mistakes
-    )
-    while True:
-        if guess in manipulated_correct_word:
-            index = manipulated_correct_word.index(guess)
-            guessed_word[index] = guess
-            manipulated_correct_word[index] = "_"
+    def draw_left_arm(self):
+        turtle.penup()
+        turtle.goto(-50, 50)
+        turtle.pendown()
+        turtle.goto(-80, 20)
 
-        else:
-            print("".join(guessed_word))
-            chosen_letters.append(guess)
-            guess, allowed_mistakes, chosen_letters = get_valid_guess(
-                chosen_letters, allowed_mistakes
-            )
+    def draw_right_arm(self):
+        turtle.penup()
+        turtle.goto(-50, 50)
+        turtle.pendown()
+        turtle.goto(-20, 20)
 
-        if "_" not in guessed_word:
-            print("You won!")
-            break
+    def draw_left_leg(self):
+        turtle.penup()
+        turtle.goto(-50, -40)
+        turtle.pendown()
+        turtle.goto(-80, -70)
+
+    def draw_right_leg(self):
+        turtle.penup()
+        turtle.goto(-50, -40)
+        turtle.pendown()
+        turtle.goto(-20, -70)
+
+    def game_won(self, CORRECT_WORD):
+        turtle.penup()
+        turtle.goto(-50, -200)
+        turtle.pendown()
+        turtle.write(
+            "Congratulations!",
+            align="center",
+            font=("courier", 24, "bold"),
+        )
+        turtle.penup()
+        turtle.goto(-50, -250)
+        turtle.pendown()
+        turtle.write(
+            f"You guessed the word {CORRECT_WORD}.",
+            align="center",
+            font=("courier", 24, "bold"),
+        )
+
+    def game_lost(self, CORRECT_WORD):
+        turtle.penup()
+        turtle.goto(-50, -200)
+        turtle.pendown()
+        turtle.write(
+            "You lost!",
+            align="center",
+            font=("courier", 24, "bold"),
+        )
+        turtle.penup()
+        turtle.goto(-50, -250)
+        turtle.pendown()
+        turtle.write(
+            f"The word was {CORRECT_WORD}.",
+            align="center",
+            font=("courier", 24, "bold"),
+        )

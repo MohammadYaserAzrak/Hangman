@@ -14,3 +14,6 @@ git clone <repo-link>
 ```
 python main.py
 ```
+
+## Demo
+![Hangman](https://github.com/MohammadYaserAzrak/Hangman/assets/110301018/03adf106-8445-4993-8c55-ce8d70c1120a)
